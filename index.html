@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GURUFLABBA · Links</title>
+  <meta name="description" content="Every link for guruflabba: Twitch, YouTube, TikTok, Instagram and X. Catch the live stream, the latest upload and the stream schedule.">
+  <meta name="theme-color" content="#05040b">
+  <meta property="og:title" content="GURUFLABBA">
+  <meta property="og:description" content="Twitch · YouTube · TikTok · Instagram · X">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 9' shape-rendering='crispEdges'%3E%3Crect width='7' height='9' fill='%2305040b'/%3E%3Cpath fill='%23ffd21f' d='M2 1h3v1H2zM1 2h1v5H1zM5 2h1v1H5zM3 4h3v1H3zM5 5h1v2H5zM2 7h3v1H2z'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sixtyfour:BLED,SCAN@0..100,-53..100&family=VT323&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+  </script>
+  <script src="https://player.twitch.tv/js/embed/v1.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body class="is-booting">
+  <canvas id="space" aria-hidden="true"></canvas>
+  <div class="crt" aria-hidden="true"></div>
+  <div class="subliminal" id="subliminal" aria-hidden="true"></div>
+
+  <div class="boot" id="boot" aria-hidden="true">
+    <p class="boot-osd">PLAY <i class="tri"></i></p>
+    <div class="boot-mid">
+      <p class="boot-tracking">TRACKING <span class="boot-bar"><i></i></span></p>
+      <p class="boot-start">PRESS START</p>
+    </div>
+    <p class="boot-foot">GF VIDEO · SP · HI-FI STEREO</p>
+  </div>
+
+  <div class="osd" aria-hidden="true">
+    <div class="osd-tl" id="osd-mode">PLAY <i class="tri"></i></div>
+    <div class="osd-tr"><span class="osd-rec" id="osd-rec"><i class="sq"></i>LIVE</span><span id="osd-ch">CH 01</span></div>
+    <div class="osd-bl">SP <span id="osd-counter">0:00:00</span></div>
+    <div class="osd-br"><span id="osd-date"></span> <span id="osd-clock"></span></div>
+  </div>
+  <div class="osd-channel" id="osd-channel" aria-hidden="true">
+    <span class="osd-channel-num"></span>
+    <span class="osd-channel-name"></span>
+  </div>
+  <button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Sound effects">SND <span>OFF</span></button>
+
+  <main id="main">
+    <header class="hero" data-channel="01" data-channel-name="GURUFLABBA">
+      <p class="hero-kicker"><i class="sq blink"></i> PLAYER 1 · SIGNAL ACQUIRED</p>
+      <h1 class="hero-title" id="title-stage"><span class="hero-title-text">GURUFLABBA</span></h1>
+      <p class="tagline">
+        <span class="sr-only">Live streams, videos and clips.</span>
+        <span aria-hidden="true">&gt; <span id="tagline"></span><span class="caret"></span></span>
+      </p>
+      <a class="status" id="status" href="#on-air" data-state="tuning">
+        <i class="status-dot"></i><span class="status-text">TUNING IN</span>
+      </a>
+    </header>
+
+    <section class="panel" id="links" data-channel="02" data-channel-name="SELECT CHANNEL" aria-labelledby="links-title">
+      <div class="panel-bar">
+        <h2 id="links-title"><i class="tri"></i> SELECT CHANNEL</h2>
+        <span class="panel-tag">MENU</span>
+      </div>
+      <ul class="menu" id="menu"></ul>
+      <noscript>
+        <ul class="menu menu-plain">
+          <li><a class="menu-item" href="https://www.twitch.tv/guruflabba">TWITCH</a></li>
+          <li><a class="menu-item" href="https://www.youtube.com/@guruflabba">YOUTUBE</a></li>
+          <li><a class="menu-item" href="https://www.tiktok.com/@guruflabba">TIKTOK</a></li>
+          <li><a class="menu-item" href="https://www.instagram.com/guruflabba">INSTAGRAM</a></li>
+          <li><a class="menu-item" href="https://x.com/guruflabba">X</a></li>
+        </ul>
+      </noscript>
+      <p class="menu-hint" aria-hidden="true"><kbd>UP</kbd><kbd>DN</kbd> MOVE &nbsp; <kbd>ENTER</kbd> SELECT</p>
+    </section>
+
+    <section class="panel" id="on-air" data-channel="03" data-channel-name="ON AIR" aria-labelledby="air-title">
+      <div class="panel-bar">
+        <h2 id="air-title"><i class="tri"></i> <span id="air-heading">BROADCAST</span></h2>
+        <span class="panel-tag">TWITCH</span>
+      </div>
+      <div class="tv" id="tv" data-state="tuning">
+        <div class="tv-screen">
+          <div class="tv-layer tv-live"><div class="twitch-player" id="twitch-player"></div></div>
+          <div class="tv-layer tv-offline" id="tv-offline"></div>
+          <div class="tv-layer tv-tuning">
+            <canvas class="static" id="tv-static"></canvas>
+            <p class="tv-msg">TUNING<span class="dots"></span></p>
+          </div>
+        </div>
+        <div class="deck">
+          <span class="deck-led" id="tv-led"></span>
+          <span class="deck-model">GF-2600</span>
+          <a class="deck-link" href="https://www.twitch.tv/guruflabba" target="_blank" rel="noopener">TWITCH.TV/GURUFLABBA</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="latest" data-channel="04" data-channel-name="LATEST UPLOAD" aria-labelledby="latest-title">
+      <div class="panel-bar">
+        <h2 id="latest-title"><i class="tri"></i> LATEST UPLOAD</h2>
+        <span class="panel-tag">YOUTUBE</span>
+      </div>
+      <div class="vcr" id="vcr" data-state="loading">
+        <div class="vcr-screen" id="vcr-screen">
+          <canvas class="static" id="vcr-static"></canvas>
+          <p class="tv-msg">LOADING TAPE<span class="dots"></span></p>
+        </div>
+        <div class="deck vcr-deck">
+          <div class="vcr-slot"><span class="dymo" id="vcr-title">NO TAPE</span></div>
+          <div class="vcr-info">
+            <span class="vcr-clock" aria-hidden="true">12:00</span>
+            <span class="vcr-meta" id="vcr-meta"></span>
+          </div>
+          <a class="deck-link" id="vcr-link" href="https://www.youtube.com/@guruflabba" target="_blank" rel="noopener">OPEN ON YOUTUBE</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot" data-channel="05" data-channel-name="END OF TAPE">
+      <p class="foot-whisper" aria-hidden="true">IT SEES YOU</p>
+      <div class="eye-space" id="eye-space" aria-hidden="true"></div>
+      <button class="rewind" id="rewind" type="button"><i class="tri rev"></i><i class="tri rev"></i> BE KIND, REWIND</button>
+      <p class="foot-small">© <span id="year">2026</span> GURUFLABBA · ALL SIGNALS RESERVED</p>
+      <p class="foot-cheat" aria-hidden="true">UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT B A</p>
+    </footer>
+  </main>
+</body>
+</html>
